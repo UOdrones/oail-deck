@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAIL — Artificial Intelligence for Energy</title>
+  <meta name="description" content="OAIL: AI-powered autonomy and intelligence for oil and gas completions, production, and midstream operations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="nav" class="nav">
+    <div class="nav-logo">
+      <span class="logo-text">OAIL</span>
+      <span class="logo-sub">AI FOR ENERGY</span>
+    </div>
+    <div class="nav-dots" id="navDots"></div>
+    <div class="nav-cta">
+      <a href="#slide-7" class="nav-button">Invest</a>
+    </div>
+  </nav>
+
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Slide 1: Title -->
+  <section class="slide slide-1" id="slide-1" data-slide="0">
+    <div class="slide-bg slide-1-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-1-content">
+      <div class="logo-badge animate-in">
+        <div class="logo-circle">
+          <span>OAIL</span>
+        </div>
+        <p class="logo-tagline">ARTIFICIAL INTELLIGENCE FOR ENERGY</p>
+      </div>
+      <h1 class="hero-title animate-in delay-1">Three industry problems —<br><span class="accent">And how we solve them</span></h1>
+      <p class="hero-subtitle animate-in delay-2">Autonomy and intelligence for completions, production, and midstream.</p>
+      <div class="timeline animate-in delay-3">
+        <div class="timeline-line"></div>
+        <div class="timeline-node" data-target="slide-2">
+          <div class="node-dot"></div>
+          <span class="node-label">Completions</span>
+          <span class="node-tag">Problem 1</span>
+        </div>
+        <div class="timeline-node" data-target="slide-4">
+          <div class="node-dot"></div>
+          <span class="node-label">Production</span>
+          <span class="node-tag">Problem 2</span>
+        </div>
+        <div class="timeline-node" data-target="slide-6">
+          <div class="node-dot"></div>
+          <span class="node-label">Midstream</span>
+          <span class="node-tag">Problem 3</span>
+        </div>
+      </div>
+      <div class="scroll-indicator animate-in delay-4">
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Completions Problem -->
+  <section class="slide slide-2" id="slide-2" data-slide="1">
+    <div class="slide-bg slide-2-bg"></div>
+    <div class="slide-overlay overlay-gradient-left"></div>
+    <div class="slide-content slide-2-content">
+      <h2 class="section-title animate-in"><span class="accent">Oil and Gas Completions:</span> The Problem</h2>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="problem-card animate-in delay-1">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085"/></svg>
+            </div>
+            <div>
+              <h3>Manual Planning</h3>
+              <p>Frac site planning relies on inefficient whiteboards and walkie-talkies.</p>
+            </div>
+          </div>
+          <div class="problem-card animate-in delay-2">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <h3>Poor Visibility</h3>
+              <p>Outdated or inconsistent imagery leads to coordination failures.</p>
+            </div>
+          </div>
+          <div class="problem-card animate-in delay-3">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25h-13.5A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25h-13.5A2.25 2.25 0 013 12V5.25"/><path d="M12 9.75v.008m0 0a.375.375 0 100-.75.375.375 0 000 .75z"/></svg>
+            </div>
+            <div>
+              <h3>No Software Solution</h3>
+              <p>No integrated platform exists for frac site coordination.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-right slide-2-image-area">
+          <!-- Aerial photo will show through the bg -->
+        </div>
+      </div>
+      <div class="kpi-bar animate-in delay-4">
+        <div class="kpi-icon">⏱</div>
+        <div class="kpi-content">
+          <span class="kpi-label">KEY PERFORMANCE INDICATOR</span>
+          <span class="kpi-stat">Avg. <strong>2–5 hours</strong> of downtime per frac = <strong>$20K–$50K+</strong> lost due to delays</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Solution Operra -->
+  <section class="slide slide-3" id="slide-3" data-slide="2">
+    <div class="slide-bg slide-3-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-3-content">
+      <div class="solution-header animate-in">
+        <span class="solution-badge">SOLUTION</span>
+        <h2 class="section-title">Operra.ai <span class="accent-subtle">(Completed)</span></h2>
+        <p class="solution-tagline">"GIS for Dummies" — SimCity meets the Oilfield</p>
+      </div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="feature-card animate-in delay-1">
+            <div class="feature-icon icon-gear">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <p>AI-driven frac and site-planning platform that turns drone imagery into to-scale layouts, logistics routes, and live dashboards.</p>
+          </div>
+          <div class="feature-card animate-in delay-2">
+            <div class="feature-icon icon-clock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <p>Eliminates downtime from poor coordination or pad design — no more sand shortages or staging delays.</p>
+          </div>
+          <div class="feature-card animate-in delay-3">
+            <div class="feature-icon icon-hardhat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
+            </div>
+            <p>Created by our cofounder, a frac professional with over 20 years of field experience.</p>
+          </div>
+        </div>
+        <div class="col-right operra-map animate-in delay-2">
+          <div class="map-frame">
+            <img src="/images/aerial-frac-pad.jpg" alt="Operra.ai GIS Map" class="map-image" />
+            <div class="map-labels">
+              <div class="map-label" style="top:12%;left:55%">Chem Float</div>
+              <div class="map-label" style="top:12%;left:75%">Chem Tubs</div>
+              <div class="map-label" style="top:35%;left:70%">Frac Pumps</div>
+              <div class="map-label" style="top:55%;left:25%">SWD Well</div>
+              <div class="map-label" style="top:65%;left:50%">Datavan</div>
+              <div class="map-label" style="top:50%;left:80%">Wireline Area</div>
+              <div class="map-label" style="top:80%;left:35%">No Go Zone</div>
+              <div class="map-label" style="top:90%;left:55%">Sand Truck Route</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Production Problem -->
+  <section class="slide slide-4" id="slide-4" data-slide="3">
+    <div class="slide-bg slide-4-bg"></div>
+    <div class="slide-overlay overlay-gradient-left"></div>
+    <div class="slide-content slide-4-content">
+      <h2 class="section-title animate-in"><span class="accent">Oil and Gas Production:</span> The Problem</h2>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="problem-card animate-in delay-1">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+            </div>
+            <div>
+              <h3>Manual Inspections</h3>
+              <p>Daily manned inspections of oil and gas sites waste time and miss early issues.</p>
+            </div>
+          </div>
+          <div class="problem-card animate-in delay-2">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H18.75m-7.5-2.25h7.5A1.125 1.125 0 0118.75 12v-1.5c0-.621-.504-1.125-1.125-1.125H11.25m0 0L9 6.75H3.375c-.621 0-1.125.504-1.125 1.125v6m9-4.5V6.75"/></svg>
+            </div>
+            <div>
+              <h3 class="stat-highlight">150–250 Miles/Day</h3>
+              <p>Lease Operators drive 150–250 miles/day to check sites that are mostly normal.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="traditional-badge animate-in delay-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="badge-icon"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+            <h3>Traditional:</h3>
+            <p>Boots on the Ground Inspection</p>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-bar animate-in delay-3">
+        <div class="kpi-icon">📊</div>
+        <div class="kpi-content">
+          <span class="kpi-label">KEY PERFORMANCE INDICATOR</span>
+          <span class="kpi-stat">Typical operator covers <strong>~40 sites/day</strong> = <strong>>$100</strong> in fuel + <strong>~6 hours</strong> labor (per person)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Solution Edge Operator -->
+  <section class="slide slide-5" id="slide-5" data-slide="4">
+    <div class="slide-bg slide-5-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-5-content">
+      <div class="solution-header animate-in">
+        <span class="solution-badge">SOLUTION</span>
+        <h2 class="section-title">Edge Operator</h2>
+        <p class="solution-tagline">Autonomous Monitoring: Cameras & Drones</p>
+      </div>
+      <div class="monitoring-grid">
+        <div class="monitoring-source animate-in delay-1">
+          <div class="source-visual">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="source-icon"><path d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/></svg>
+          </div>
+          <h3>Cameras <span class="dim">(Fixed Monitoring)</span></h3>
+          <p>Continuous, 24/7 site surveillance. Detects leaks, equipment failures, and safety hazards in real-time. Eliminates the need for daily manual checks.</p>
+        </div>
+        <div class="monitoring-arrow animate-in delay-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </div>
+        <div class="monitoring-core animate-in delay-2">
+          <div class="core-ring">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+          </div>
+          <h3>Intelligent Data Analysis</h3>
+        </div>
+        <div class="monitoring-arrow animate-in delay-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </div>
+        <div class="monitoring-source animate-in delay-3">
+          <div class="source-visual">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+          </div>
+          <h3>Drones <span class="dim">(Aerial Inspection)</span></h3>
+          <p>Automated, scheduled aerial surveys. Covers large and remote areas quickly. Provides high-resolution imagery and thermal data for comprehensive analysis.</p>
+        </div>
+      </div>
+      <div class="cta-banner animate-in delay-4">
+        <p>Enabling safer, more efficient operations by replacing manual labor with smart technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Intelligence -->
+  <section class="slide slide-6" id="slide-6" data-slide="5">
+    <div class="slide-bg slide-6-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-6-content">
+      <h2 class="section-title animate-in">Intelligence should work with the customer's<br><span class="accent">real-world camera environment</span></h2>
+      <div class="intelligence-flow animate-in delay-1">
+        <div class="flow-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="flow-icon"><path d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+          <span>Camera</span>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node flow-core">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="flow-icon"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          <span>Intelligence Core</span>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node">
+          <div class="alert-preview">
+            <div class="alert-dot"></div>
+            <span class="alert-text">CRITICAL ALERT</span>
+            <p class="alert-detail">Dirty Rod Detected at Wellhead. Action Required.</p>
+          </div>
+          <span>Operator Interface</span>
+        </div>
+      </div>
+      <div class="features-row">
+        <div class="intel-feature animate-in delay-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <h4>Camera-Agnostic Deployment</h4>
+          <p>Built to be camera agnostic, enabling deployment across mixed vendors, site layouts, and existing infrastructure.</p>
+        </div>
+        <div class="intel-feature animate-in delay-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path d="M6 6h.008v.008H6V6z"/></svg>
+          <h4>Intelligent Tagging</h4>
+          <p>Identifies assets, equipment, events, and anomalies in the field to create structured operational context.</p>
+        </div>
+        <div class="intel-feature animate-in delay-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          <h4>Operator Intelligence</h4>
+          <p>Edge Operator layers on intelligence: what changed, why it matters, and actionable next steps.</p>
+        </div>
+      </div>
+      <div class="cta-banner animate-in delay-5">
+        <p>Transforming raw video into actionable structured context for your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: The Raise -->
+  <section class="slide slide-7" id="slide-7" data-slide="6">
+    <div class="slide-bg slide-7-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-7-content">
+      <div class="raise-header animate-in">
+        <span class="raise-badge">SEED ROUND</span>
+        <h2 class="raise-amount">$2.5M</h2>
+        <p class="raise-tagline">Join the Future of Energy Intelligence</p>
+      </div>
+      <p class="raise-description animate-in delay-1">We're raising $2.5M to scale our AI-powered autonomous monitoring and site intelligence platform across North America's oilfields.</p>
+      <div class="use-of-funds animate-in delay-2">
+        <div class="fund-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+          <h4>Product Development</h4>
+          <p>Scale Edge Operator & Operra.ai platforms</p>
+        </div>
+        <div class="fund-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+          <h4>Team Growth</h4>
+          <p>Engineering, sales, and field operations</p>
+        </div>
+        <div class="fund-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+          <h4>Market Expansion</h4>
+          <p>Deploy across Bakken, Permian, and Eagle Ford basins</p>
+        </div>
+      </div>
+      <div class="contact-bar animate-in delay-3">
+        <div class="contact-info">
+          <span class="contact-label">Get in Touch</span>
+          <a href="mailto:info@oail.ai" class="contact-link">info@oail.ai</a>
+        </div>
+        <a href="#slide-1" class="contact-cta">Back to Top ↑</a>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
