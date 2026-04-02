@@ -268,11 +268,12 @@ body {
    SLIDE 1 — Title
    ============================================ */
 .slide-1-bg {
-  background: radial-gradient(ellipse at center bottom, var(--accent-dark) 0%, var(--bg-primary) 60%);
+  background-image: url('/images/diagram-ui.jpg');
+  background-position: center;
 }
 
 .slide-1 .slide-overlay {
-  background: transparent;
+  background: rgba(10, 10, 10, 0.85);
 }
 
 .slide-1-content {
@@ -532,7 +533,8 @@ body {
    SLIDE 3 — Solution Operra
    ============================================ */
 .slide-3-bg {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #0f0f0f 50%, var(--bg-secondary) 100%);
+  background-image: url('/images/aerial-frac-pad.jpg');
+  background-position: center;
 }
 
 .slide-3-content {
@@ -653,7 +655,8 @@ body {
    SLIDE 4 — Production Problem
    ============================================ */
 .slide-4-bg {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #0f0808 100%);
+  background-image: url('/images/pump-jacks.jpg');
+  background-position: center bottom;
 }
 
 .slide-4-content {
@@ -699,7 +702,8 @@ body {
    SLIDE 5 — Edge Operator Solution
    ============================================ */
 .slide-5-bg {
-  background: linear-gradient(180deg, var(--bg-primary) 0%, #0a0808 100%);
+  background-image: url('/images/pump-jacks-ui.jpg');
+  background-position: center bottom;
 }
 
 .slide-5-content {
@@ -838,7 +842,8 @@ body {
    SLIDE 6 — Intelligence
    ============================================ */
 .slide-6-bg {
-  background: var(--bg-primary);
+  background-image: url('/images/refinery-ui.jpg');
+  background-position: center;
 }
 
 .slide-6-content {
@@ -993,11 +998,12 @@ body {
    SLIDE 7 — The Raise
    ============================================ */
 .slide-7-bg {
-  background: radial-gradient(ellipse at center, rgba(127, 29, 29, 0.15) 0%, var(--bg-primary) 70%);
+  background-image: url('/images/diagram-ui.jpg');
+  background-position: center;
 }
 
 .slide-7 .slide-overlay {
-  background: transparent;
+  background: rgba(10, 10, 10, 0.90);
 }
 
 .slide-7-content {
