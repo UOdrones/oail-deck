@@ -158,10 +158,11 @@
     </div>
   </section>
 
-  <!-- Slide 4: Production Problem -->
+  
+  <!-- Slide 4: Production Problem (Context) -->
   <section class="slide slide-4" id="slide-4" data-slide="3">
-    <video class="slide-bg-video" style="object-position: center bottom;" autoplay loop muted playsinline poster="/images/pump-jacks.jpg">
-      <source src="/videos/leak.mp4" type="video/mp4" />
+    <video class="slide-bg-video" autoplay loop muted playsinline poster="/images/pump-jacks.jpg">
+      <source src="/videos/siteview.mp4" type="video/mp4" />
     </video>
     <div class="slide-bg slide-4-bg fallback-bg"></div>
     <div class="slide-overlay overlay-gradient-left"></div>
@@ -189,13 +190,7 @@
           </div>
         </div>
         <div class="col-right">
-          <div class="visual-problem-card animate-in delay-2">
-            <img src="/images/nasty-wellhead.jpg" alt="Nasty pooling at wellhead" class="problem-image" />
-            <div class="problem-image-label">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-              <span>Undetected Leak Event</span>
-            </div>
-          </div>
+          <!-- Empty for now, allowing background video to shine through ->
         </div>
       </div>
       <div class="kpi-bar animate-in delay-3">
@@ -208,11 +203,45 @@
     </div>
   </section>
 
-  <!-- Slide 5: Solution Edge Operator -->
+  <!-- Slide 5: The Leak Problem -->
   <section class="slide slide-5" id="slide-5" data-slide="4">
-    <div class="slide-bg slide-5-bg"></div>
-    <div class="slide-overlay"></div>
+    <video class="slide-bg-video" style="object-position: center bottom;" autoplay loop muted playsinline poster="/images/pump-jacks.jpg">
+      <source src="/videos/leak.mp4" type="video/mp4" />
+    </video>
+    <div class="slide-bg slide-5-bg fallback-bg"></div>
+    <div class="slide-overlay overlay-gradient-left"></div>
     <div class="slide-content slide-5-content">
+      <h2 class="section-title animate-in"><span class="accent">Costly Reality:</span> Undetected Events</h2>
+      <div class="two-col">
+        <div class="col-left">
+           <div class="problem-card animate-in delay-1">
+             <div class="problem-icon">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+             </div>
+             <div>
+               <h3>Environmental & Financial Impact</h3>
+               <p>Undetected wellhead pooling and mechanical leaks cause major compliance fines and resource loss before the next manual inspection.</p>
+             </div>
+           </div>
+        </div>
+        <div class="col-right">
+          <div class="visual-problem-card animate-in delay-2">
+            <img src="/images/nasty-wellhead.jpg" alt="Nasty pooling at wellhead" class="problem-image" />
+            <div class="problem-image-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span>Undetected Leak Event</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Solution Edge Operator -->
+  <section class="slide slide-6" id="slide-6" data-slide="5">
+    <div class="slide-bg slide-6-bg"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content slide-6-content">
       <div class="solution-header animate-in">
         <span class="solution-badge">SOLUTION</span>
         <h2 class="section-title">Edge Operator</h2>
@@ -252,14 +281,14 @@
     </div>
   </section>
 
-  <!-- Slide 6: Intelligence -->
-  <section class="slide slide-6" id="slide-6" data-slide="5">
+  <!-- Slide 7: Intelligence -->
+  <section class="slide slide-7" id="slide-7" data-slide="6">
     <video class="slide-bg-video" autoplay loop muted playsinline poster="/images/cv-tanks-1.jpg">
       <source src="/videos/solution.mp4" type="video/mp4" />
     </video>
-    <div class="slide-bg slide-6-bg fallback-bg"></div>
+    <div class="slide-bg slide-7-bg fallback-bg"></div>
     <div class="slide-overlay"></div>
-    <div class="slide-content slide-6-content">
+    <div class="slide-content slide-7-content">
       <h2 class="section-title animate-in">Intelligence should work with the customer's<br><span class="accent">real-world camera environment</span></h2>
       <div class="intelligence-flow animate-in delay-1">
         <div class="flow-node">
@@ -304,11 +333,11 @@
     </div>
   </section>
 
-  <!-- Slide 7: The Raise -->
-  <section class="slide slide-7" id="slide-7" data-slide="6">
-    <div class="slide-bg slide-7-bg"></div>
+  <!-- Slide 8: The Raise -->
+  <section class="slide slide-8" id="slide-8" data-slide="7">
+    <div class="slide-bg slide-8-bg"></div>
     <div class="slide-overlay"></div>
-    <div class="slide-content slide-7-content">
+    <div class="slide-content slide-8-content">
       <div class="raise-header animate-in">
         <span class="raise-badge">SEED ROUND • 18-MONTH RUNWAY</span>
         <h2 class="raise-amount">$2.5M</h2>

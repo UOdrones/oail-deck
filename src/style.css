@@ -1,4 +1,15 @@
 /* ============================================
+   SLIDE 5 — The Leak Problem
+   ============================================ */
+.slide-5-bg {
+  background-image: url('/images/pump-jacks.jpg');
+  background-position: center bottom;
+}
+.slide-5-content {
+  gap: 1.5rem;
+}
+
+/* ============================================
    OAIL DECK — Investor Presentation
    Dark, professional, deep crimson accents
    ============================================ */
@@ -702,12 +713,12 @@ body {
 /* ============================================
    SLIDE 5 — Edge Operator Solution
    ============================================ */
-.slide-5-bg {
+.slide-6-bg {
   background-image: url('/images/storm-pump.jpg');
   background-position: center bottom;
 }
 
-.slide-5-content {
+.slide-6-content {
   gap: 2rem;
 }
 
@@ -842,12 +853,12 @@ body {
 /* ============================================
    SLIDE 6 — Intelligence
    ============================================ */
-.slide-6-bg {
+.slide-7-bg {
   background-image: url('/images/cv-tanks-1.jpg');
   background-position: center;
 }
 
-.slide-6-content {
+.slide-7-content {
   gap: 2rem;
 }
 
@@ -998,16 +1009,16 @@ body {
 /* ============================================
    SLIDE 7 — The Raise
    ============================================ */
-.slide-7-bg {
+.slide-8-bg {
   background-image: url('/images/diagram-ui.jpg');
   background-position: center;
 }
 
-.slide-7 .slide-overlay {
+.slide-8 .slide-overlay {
   background: rgba(10, 10, 10, 0.90);
 }
 
-.slide-7-content {
+.slide-8-content {
   align-items: center;
   text-align: center;
   gap: 1.5rem;
