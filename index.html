@@ -283,9 +283,16 @@
 
   <!-- Slide 7: Intelligence -->
   <section class="slide slide-7" id="slide-7" data-slide="6">
-    <video class="slide-bg-video" autoplay loop muted playsinline poster="/images/cv-tanks-1.jpg">
-      <source src="/videos/solution.mp4" type="video/mp4" />
-    </video>
+    <div class="split-video-bg">
+      <video class="split-video left-video" id="vidUntagged" autoplay loop muted playsinline>
+        <source src="/videos/notag1.mp4" type="video/mp4" />
+      </video>
+      <video class="split-video right-video" id="vidTagged" autoplay loop muted playsinline>
+        <source src="/videos/besttag.mp4" type="video/mp4" />
+      </video>
+      <div class="video-label label-left">Raw Field Feed</div>
+      <div class="video-label label-right">Intelligence Tagging</div>
+    </div>
     <div class="slide-bg slide-7-bg fallback-bg"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content slide-7-content">

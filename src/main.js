@@ -118,3 +118,40 @@ window.addEventListener('scroll', () => {
     }
   });
 }, { passive: true });
+
+
+// ============================================
+// Syncing logic for Intelligence screen tracking
+// ============================================
+const vidUntagged = document.getElementById('vidUntagged');
+const vidTagged = document.getElementById('vidTagged');
+if(vidUntagged && vidTagged) {
+  // Configurable offset (in seconds)
+  window.SYNC_OFFSET = 0; 
+  
+  const syncVideos = () => {
+    if (!vidUntagged.paused) {
+      let targetTime = vidUntagged.currentTime + window.SYNC_OFFSET;
+      
+      // If we attempt to seek past the length of the shorter tagged video, loop early
+      if (vidTagged.readyState >= 1 && targetTime > vidTagged.duration - 0.1) {
+        vidUntagged.currentTime = 0; 
+        targetTime = window.SYNC_OFFSET;
+      }
+      
+      if (Math.abs(vidTagged.currentTime - targetTime) > 0.15) {
+        vidTagged.currentTime = targetTime;
+      }
+    }
+    requestAnimationFrame(syncVideos);
+  };
+  
+  vidUntagged.addEventListener('play', () => {
+    vidTagged.play();
+    syncVideos();
+  });
+  
+  vidUntagged.addEventListener('pause', () => {
+    vidTagged.pause();
+  });
+}
