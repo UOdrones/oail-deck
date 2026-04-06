@@ -720,7 +720,9 @@ body {
 }
 
 .slide-6-content {
-  gap: 2rem;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
 }
 
 /* Monitoring grid */
