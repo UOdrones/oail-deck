@@ -317,8 +317,7 @@ body {
   width: 100%;
   max-width: 340px;
   height: auto;
-  filter: drop-shadow(0 0 40px rgba(185, 28, 28, 0.4)) invert(1);
-  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 40px rgba(185, 28, 28, 0.4));
   margin-bottom: -1rem;
 }
 
