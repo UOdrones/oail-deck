@@ -1,0 +1,123 @@
+﻿THE EDGE OPERATOR STORY
+How autonomous inspections redefine LOE, field efficiency, and shareholder value
+________________
+
+
+1. What a Pumper or Lease Operator Really Does
+Every day, pumpers climb into a 3/4-ton truck and begin a familiar loop, driving 150 to 250 miles across fifty wells or tank batteries. Their job is a nonstop sequence of visual inspections:
+• Checking tank levels, hatches, seals
+• Reading pressure and temperature gauges
+• Verifying chemical pumps and chemical inventory
+• Inspecting wellheads, stuffing boxes, rod pumps, ESPs
+• Confirming heater-treater and separator performance
+• Inspecting flowlines for leaks or staining
+• Checking berms for pooling fluids or erosion
+• Detecting emissions, vapor plumes, or unusual smells
+• Watching for unauthorized vehicles or unsafe work
+• Cross-referencing SCADA data with reality
+• Documenting everything manually
+More than eighty percent of this work is simply looking. The only reason the truck is moving all day is because the operator needs eyes on every site.
+Not knowing is expensive.
+________________
+
+
+2. The Real Cost of Doing This the Old Way
+Most people calculate only wages and fuel. The actual cost is much higher once you include the full corporate load.
+Assumptions based on your data:
+• $50 per hour
+• 12-hour shifts
+• 8-on / 6-off rotation
+• 3/4-ton truck, about 200 miles per day
+• Fifty wells per route
+A. Labor (fully burdened):
+12 hours × $50 = $600
+Burdened with tax, benefits, insurance = about $780 per day
+B. Truck cost (fuel, tires, maintenance, depreciation, insurance):
+Roughly $130 per day
+C. Insurance and corporate risk exposure (workers comp, auto liability, environmental liability):
+About $20 per day
+D. HSE exposure cost (driving risk, ladder climbs, slips, TRIR impact):
+About $10 per day
+E. PPE, training, certification costs:
+About $5 per day
+F. Admin and fleet overhead:
+About $5 per day
+The true daily cost of one pumper route is about $950.
+Since the pumper covers fifty wells per day, the cost is $19 per site per day.
+Annually, that is $6,935 per site per year, or $346,750 per fifty-well route.
+This is the real LOE burden, and it does not yet include spill exposure or production loss.
+________________
+
+
+3. The Spill Problem and Why Detection Time Matters
+If a leak starts right after a pumper leaves a site, it may run twelve to twenty-four hours before anyone sees it. Small leaks grow into moderate events. Moderate events become reportable spills. Cleanups that could have cost a few thousand dollars turn into tens of thousands, with excavation, trucking, disposal, soil sampling, and regulatory reporting.
+Using conservative numbers, the expected annual spill cost per well under the traditional model is about $2,350.
+With Edge Operator and daily automated visual inspection, detection drops to one to four hours. Faster detection dramatically reduces spill volume and severity, cutting the expected cost to about $1,250 per well.
+Savings from early spill detection is roughly $1,100 per well per year.
+This savings applies across the entire field and is one of the largest, most consistent LOE improvements available.
+________________
+
+
+4. What Edge Operator Is and How It Works
+Edge Operator is the new operating model for field surveillance. It works with any camera:
+• Fixed-wing drones capable of covering several hundred wells per day
+• Drone-in-a-box systems at tank batteries and facilities
+• Tethered drones for continuous overhead inspection
+• Permanent pad cameras
+• Thermal cameras, IR sensors, optical zoom systems
+• Existing security cameras
+• Even phone or tablet imagery
+If it captures imagery, Edge Operator can analyze it.
+What the AI detects:
+• Leaks, staining, pooling fluids
+• Tank level anomalies
+• Hatch status
+• Berm condition changes
+• Flaring or emissions irregularities
+• Pumpjack behavior
+• Chemical pump failures
+• Heater-treater and separator issues
+• Unauthorized vehicles
+• SCADA mismatches
+• Temperature or equipment state changes
+What the system produces:
+• Daily automated site scorecards
+• Real-time anomaly alerts
+• Immediate dispatch instructions
+• Trendlines for chemicals, equipment, and performance
+• Regulatory-ready documentation
+Pumpers stop driving just to look. They only drive when something needs attention.
+________________
+
+
+5. How Edge Operator Changes LOE
+Combine all the costs:
+Traditional LOE per well per year
+• Pumper and truck: about $6,935
+• Spill exposure: about $2,350
+• Chemical, production, and workover inefficiency: $250 to $1,200
+Total: roughly $9,500 to $10,500 per well per year
+Edge Operator LOE per well per year
+• Automated inspections and exception-based dispatch: $2,000 to $3,000
+• Spill exposure under fast detection: about $1,250
+• Reduced inefficiencies: $125 to $600
+Total: roughly $3,500 to $4,850 per well per year
+Savings per well
+About $5,000 to $7,000
+Savings on a 500-well field
+$2.8 million to $3.5 million every year
+These are direct LOE reductions. They flow directly into margin and free cash flow.
+________________
+
+
+6. Why Reducing LOE Increases Shareholder Value
+Lower LOE increases operating margin, netback, EBITDA, and free cash flow. Every dollar saved in LOE becomes a dollar of profit. Lower LOE reduces the corporate break-even oil price, improves resilience during downturns, and strengthens analyst sentiment around operational discipline.
+When a 500-well field reduces LOE by three million dollars per year, that improvement is visible in earnings reports, cash flow statements, and valuation models. It is one of the clearest levers an operator can pull to increase stock value.
+________________
+
+
+7. Why I Am the One Building This
+I spent nearly ten years as a pumper and lease operator before ever touching a drone. I know exactly how routes are run, how long each task really takes, why spills grow, where money leaks out of LOE, and what field teams actually need to make better decisions.
+Then, for the last four years, I built one of the most active drone operations in the oil industry. I have flown thousands of missions across well pads, tank batteries, pipelines, SWDs, new construction, reclamation, and environmental monitoring. I have seen what drones catch instantly that humans often miss until the next day.
+I understand the field work because I did it for a decade. I understand the aerial and AI side because I built it from the ground up. Edge Operator is the result of both perspectives. It is designed by someone who understands the job behind the windshield and the advantages in the sky.
+No one else has lived both sides of this problem. That is why Edge Operator works and why it delivers real LOE savings that operators can measure and report.
