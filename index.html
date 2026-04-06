@@ -215,24 +215,31 @@
            </div>
         </div>
         <div class="col-right" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="visual-problem-card animate-in delay-2" style="margin: 0;">
+            <img src="/images/nasty-wellhead.jpg" alt="Nasty pooling at wellhead" class="problem-image" style="height: 200px; object-fit: cover;" />
+            <div class="problem-image-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span>Undetected Leak Event</span>
+            </div>
+          </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-            <div class="visual-problem-card animate-in delay-2" style="margin: 0;">
-              <img src="/images/wellhead-leak-close.jpg" alt="Leaking stuffing box" class="problem-image" style="height: 180px; object-fit: cover;" />
+            <div class="visual-problem-card animate-in delay-3" style="margin: 0;">
+              <img src="/images/wellhead-leak-close.jpg" alt="Leaking stuffing box" class="problem-image" style="height: 140px; object-fit: cover;" />
               <div class="problem-image-label">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 <span>Stuffing Box Leak</span>
               </div>
             </div>
             <div class="visual-problem-card animate-in delay-3" style="margin: 0;">
-              <img src="/images/wellhead-leak-wide.jpg" alt="Wellhead leak wide view" class="problem-image" style="height: 180px; object-fit: cover;" />
+              <img src="/images/wellhead-leak-wide.jpg" alt="Wellhead leak wide" class="problem-image" style="height: 140px; object-fit: cover;" />
               <div class="problem-image-label">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 <span>Undetected Wellhead</span>
               </div>
             </div>
           </div>
-          <div class="animate-in delay-4" style="background: rgba(185,28,28,0.15); border: 1px solid var(--accent); border-radius: 8px; padding: 1rem 1.25rem; text-align: center;">
-            <p style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; margin: 0;">These events are <span class="accent">entirely preventable</span>. Edge Operator catches them in hours — not days.</p>
+          <div class="animate-in delay-4" style="background: rgba(185,28,28,0.15); border: 1px solid var(--accent); border-radius: 8px; padding: 0.75rem 1rem; text-align: center;">
+            <p style="color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin: 0;">These events are <span class="accent">entirely preventable</span>. Edge Operator catches them in hours — not days.</p>
           </div>
         </div>
       </div>
@@ -249,36 +256,33 @@
         <h2 class="section-title">Edge Operator</h2>
         <p class="solution-tagline">Autonomous Monitoring: Cameras & Drones</p>
       </div>
-      <div class="monitoring-grid">
-        <div class="monitoring-source animate-in delay-1">
-          <div class="source-visual">
-            <img src="/images/camera-cgi.jpg" alt="AI Camera Monitoring" style="width: 100%; max-width: 280px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);" />
+      <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; width: 100%; max-width: 1100px; flex: 1;">
+        <!-- Cameras Card -->
+        <div class="animate-in delay-1" style="background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden;">
+          <img src="/images/camera-cgi.jpg" alt="AI Camera Monitoring" style="width: 100%; height: 280px; object-fit: cover; display: block;" />
+          <div style="padding: 1.25rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Cameras <span style="color: #666;">(Fixed Monitoring)</span></h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Continuous 24/7 site surveillance. Detects leaks, equipment failures, and safety hazards in real-time.</p>
           </div>
-          <h3>Cameras <span class="dim">(Fixed Monitoring)</span></h3>
-          <p>Continuous, 24/7 site surveillance. Detects leaks, equipment failures, and safety hazards in real-time. Eliminates the need for daily manual checks.</p>
         </div>
-        <div class="monitoring-arrow animate-in delay-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </div>
-        <div class="monitoring-core animate-in delay-2">
-          <div class="core-ring">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+        <!-- Center AI Core -->
+        <div class="animate-in delay-2" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; background: rgba(185,28,28,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 32px; height: 32px; color: var(--accent);"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
           </div>
-          <h3>Intelligent Data Analysis</h3>
+          <h3 style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-align: center;">Edge<br>Intelligence</h3>
         </div>
-        <div class="monitoring-arrow animate-in delay-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </div>
-        <div class="monitoring-source animate-in delay-3">
-          <div class="source-visual">
-            <img src="/images/aerial-pumpjack.jpg" alt="Drone Aerial Inspection" style="width: 100%; max-width: 280px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);" />
+        <!-- Drones Card -->
+        <div class="animate-in delay-3" style="background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden;">
+          <img src="/images/aerial-pumpjack.jpg" alt="Drone Aerial Inspection" style="width: 100%; height: 280px; object-fit: cover; display: block;" />
+          <div style="padding: 1.25rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Drones <span style="color: #666;">(Aerial Inspection)</span></h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Automated aerial surveys covering hundreds of wells per day with high-resolution imagery and thermal data.</p>
           </div>
-          <h3>Drones <span class="dim">(Aerial Inspection)</span></h3>
-          <p>Automated, scheduled aerial surveys. Covers large and remote areas quickly. Provides high-resolution imagery and thermal data for comprehensive analysis.</p>
         </div>
       </div>
       <div class="cta-banner animate-in delay-4">
-        <p>Enabling safer, more efficient operations by replacing manual labor with smart technology.</p>
+        <p>If it captures imagery, Edge Operator can analyze it — fixed cameras, drones, even phone footage.</p>
       </div>
     </div>
   </section>

@@ -293,11 +293,12 @@ body {
    ============================================ */
 .slide-1-bg {
   background-image: url('/images/cool2.jpg');
-  background-position: center;
+  background-position: 65% center;
+  background-size: cover;
 }
 
 .slide-1 .slide-overlay {
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(10, 10, 10, 0.75);
 }
 
 .slide-1-content {
