@@ -5,168 +5,194 @@ export function initThreeScene() {
   if (!canvas) return;
 
   const scene = new THREE.Scene();
-  // Add a slight fog to blend with the background organically
-  scene.fog = new THREE.FogExp2(0x0a0a0a, 0.02);
+  scene.background = new THREE.Color(0xf1f3f5); // Soft white room background
+  scene.fog = new THREE.Fog(0xf1f3f5, 10, 60); // Fade into white
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 22;
-  camera.position.y = 2;
-  camera.lookAt(0, 0, 0);
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 150);
+  camera.position.set(0, 15, 25);
+  camera.lookAt(0, 0, -5);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
   scene.add(ambientLight);
   
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-  dirLight.position.set(10, 20, 10);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(20, 30, 10);
+  dirLight.castShadow = true;
+  dirLight.shadow.mapSize.width = 2048;
+  dirLight.shadow.mapSize.height = 2048;
+  dirLight.shadow.camera.near = 0.5;
+  dirLight.shadow.camera.far = 100;
+  dirLight.shadow.camera.left = -30;
+  dirLight.shadow.camera.right = 30;
+  dirLight.shadow.camera.top = 30;
+  dirLight.shadow.camera.bottom = -30;
   scene.add(dirLight);
-  
-  // A glowing red light in the center to highlight the AI vibe
-  const pointLight = new THREE.PointLight(0xb91c1c, 2.5, 50);
-  pointLight.position.set(0, 0, 5);
-  scene.add(pointLight);
 
-  // Groups
+  // The Floor (Chip surface)
+  const floorGeo = new THREE.PlaneGeometry(100, 100);
+  const floorMat = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    roughness: 0.15,
+    metalness: 0.05
+  });
+  const floor = new THREE.Mesh(floorGeo, floorMat);
+  floor.rotation.x = -Math.PI / 2;
+  floor.receiveShadow = true;
+  scene.add(floor);
+
+  // The GPU Processor
+  const gpuGroup = new THREE.Group();
+  gpuGroup.position.set(0, 0.8, -12);
+  scene.add(gpuGroup);
+
+  const gpuGeo = new THREE.BoxGeometry(6, 1.6, 6);
+  const gpuMat = new THREE.MeshStandardMaterial({
+    color: 0x222222,
+    metalness: 0.9,
+    roughness: 0.1,
+  });
+  const gpu = new THREE.Mesh(gpuGeo, gpuMat);
+  gpu.castShadow = true;
+  gpu.receiveShadow = true;
+  gpuGroup.add(gpu);
+
+  // GPU Light emission
+  const gpuLight = new THREE.PointLight(0xb91c1c, 0, 30);
+  gpuLight.position.set(0, 2, 0);
+  gpuGroup.add(gpuLight);
+
+  // Add some aesthetic fins to GPU
+  const finMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 1 });
+  for (let i=-2; i<=2; i+=0.5) {
+     const fin = new THREE.Mesh(new THREE.BoxGeometry(5.8, 2, 0.2), finMat);
+     fin.position.set(0, 0, i);
+     fin.castShadow = true;
+     gpuGroup.add(fin);
+  }
+
+  // Circuit Traces
+  const traces = []; 
+  // Arrays to hold the routing logic
+  for (let i = 0; i < 25; i++) {
+    // Random input spots scattered around the floor
+    const startPt = new THREE.Vector3(
+      (Math.random() - 0.5) * 50,
+      0.01,
+      (Math.random() - 0.5) * 30 + 5
+    );
+
+    // Filter points too close to GPU to avoid clipping
+    if (startPt.distanceTo(gpuGroup.position) < 8) continue;
+
+    const points = [];
+    points.push(startPt);
+    
+    // Orthogonal routing for circuit board look
+    const turn1 = new THREE.Vector3(startPt.x, 0.01, gpuGroup.position.z + (Math.random()-0.5)*2);
+    points.push(turn1);
+    
+    const turn2 = new THREE.Vector3(gpuGroup.position.x + (Math.random()-0.5)*4, 0.01, turn1.z);
+    points.push(turn2);
+
+    const endPt = new THREE.Vector3(turn2.x, 0.01, gpuGroup.position.z);
+    points.push(endPt);
+
+    const traceGeo = new THREE.BufferGeometry().setFromPoints(points);
+    const traceMat = new THREE.LineBasicMaterial({ color: 0xcccccc, linewidth: 2 });
+    const traceLine = new THREE.Line(traceGeo, traceMat);
+    scene.add(traceLine);
+    
+    traces.push({
+      start: startPt,
+      waypoints: [startPt, turn1, turn2, endPt]
+    });
+  }
+
+  // Droplets
   const droplets = [];
-  const aiNodes = [];
-  const explosions = [];
-
-  // Geometries & Materials
-  // Droplet: dark, incredibly shiny physical material
-  const dropletGeo = new THREE.SphereGeometry(0.35, 32, 32);
+  const dropletGeo = new THREE.SphereGeometry(0.3, 32, 32);
+  // Dripping black oil
   const dropletMat = new THREE.MeshPhysicalMaterial({
     color: 0x050505,
-    metalness: 0.9,
-    roughness: 0.05,
+    metalness: 1.0,
+    roughness: 0.1,
     clearcoat: 1.0,
     clearcoatRoughness: 0.1
   });
 
-  // AI Nodes: geometric wireframe that looks highly technical
-  const aiNodeGeo = new THREE.IcosahedronGeometry(0.4, 0);
-  const aiNodeMat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    emissive: 0xb91c1c,
-    emissiveIntensity: 1.2,
-    wireframe: true
-  });
-
-  // Create Oil Droplets
-  for (let i = 0; i < 70; i++) {
+  function spawnDroplet() {
     const mesh = new THREE.Mesh(dropletGeo, dropletMat);
-    mesh.position.set(
-      (Math.random() - 0.5) * 40,
-      10 + Math.random() * 30, // Start high
-      (Math.random() - 0.5) * 20
-    );
+    const traceData = traces[Math.floor(Math.random() * traces.length)];
+    
+    mesh.position.set(traceData.start.x, 20 + Math.random() * 15, traceData.start.z);
+    mesh.castShadow = true;
     scene.add(mesh);
+    
     droplets.push({
       mesh,
-      velocity: new THREE.Vector3(
-        (Math.random() - 0.5) * 0.01,
-        -0.03 - Math.random() * 0.04, // Fall downwards
-        (Math.random() - 0.5) * 0.01
-      ),
-      baseScale: 0.5 + Math.random() * 0.8 // Random droplet sizes
+      traceData,
+      velocity: 0
     });
   }
 
-  // Create AI Nodes
-  for (let i = 0; i < 25; i++) {
-    const mesh = new THREE.Mesh(aiNodeGeo, aiNodeMat);
-    mesh.position.set(
-      (Math.random() - 0.5) * 30,
-      (Math.random() - 0.5) * 20,
-      (Math.random() - 0.5) * 15
-    );
+  // Initialize droplets
+  for (let i=0; i<8; i++) spawnDroplet();
+
+  // AI Data Packets shooting down traces
+  const packets = [];
+  function spawnPacket(traceData) {
+    const packetGeo = new THREE.SphereGeometry(0.15, 16, 16);
+    const packetMat = new THREE.MeshBasicMaterial({ color: 0xe11d48 });
+    const mesh = new THREE.Mesh(packetGeo, packetMat);
+    
+    mesh.position.copy(traceData.start);
     scene.add(mesh);
-    aiNodes.push({
+    
+    const light = new THREE.PointLight(0xe11d48, 2, 5);
+    mesh.add(light);
+    
+    packets.push({
       mesh,
-      velocity: new THREE.Vector3(
-        (Math.random() - 0.5) * 0.1,
-        (Math.random() - 0.5) * 0.1,
-        (Math.random() - 0.5) * 0.1
-      ),
-      target: null
+      waypoints: traceData.waypoints,
+      currentWaypoint: 0,
+      progress: 0,
+      speed: 0.04 + Math.random() * 0.03
     });
   }
 
-  // Cool Explosion Effect
-  function createExplosion(position) {
-    const explosionGeo = new THREE.BufferGeometry();
-    const particleCount = 60;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const velocities = [];
-
-    const sparkColor1 = new THREE.Color(0xff4400); // Bright orange/red
-    const sparkColor2 = new THREE.Color(0xffcc00); // Yellow/gold
-
-    for (let i = 0; i < particleCount; i++) {
-      positions[i*3]     = position.x;
-      positions[i*3+1] = position.y;
-      positions[i*3+2] = position.z;
-      
-      // Explosion velocities outwards spherically
-      const u = Math.random();
-      const v = Math.random();
-      const theta = 2 * Math.PI * u;
-      const phi = Math.acos(2 * v - 1);
-      const speed = 0.2 + Math.random() * 0.3;
-
-      velocities.push(new THREE.Vector3(
-        Math.sin(phi) * Math.cos(theta) * speed,
-        Math.sin(phi) * Math.sin(theta) * speed,
-        Math.cos(phi) * speed
-      ));
-
-      // Colors
-      const clr = sparkColor1.clone().lerp(sparkColor2, Math.random());
-      colors[i*3]     = clr.r;
-      colors[i*3+1] = clr.g;
-      colors[i*3+2] = clr.b;
+  // Splash Effect
+  const splashes = [];
+  function createSplash(position) {
+    const splashGeo = new THREE.BufferGeometry();
+    const count = 15;
+    const posArray = new Float32Array(count * 3);
+    const vels = [];
+    for(let i=0; i<count; i++) {
+        posArray[i*3] = position.x;
+        posArray[i*3+1] = position.y;
+        posArray[i*3+2] = position.z;
+        vels.push(new THREE.Vector3(
+           (Math.random()-0.5)*0.3,
+           0.1 + Math.random()*0.3,
+           (Math.random()-0.5)*0.3
+        ));
     }
-    
-    explosionGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    explosionGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    
-    const explosionMat = new THREE.PointsMaterial({
-      size: 0.15,
-      vertexColors: true,
-      transparent: true,
-      opacity: 1,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    
-    const explosionPoints = new THREE.Points(explosionGeo, explosionMat);
-    scene.add(explosionPoints);
-    
-    explosions.push({
-      points: explosionPoints,
-      velocities,
-      life: 1.0,
-      scale: 1.0
-    });
-    
-    // Create a momentary intense flash of light
-    const flash = new THREE.PointLight(0xff5500, 5, 10);
-    flash.position.copy(position);
-    scene.add(flash);
-    setTimeout(() => {
-      scene.remove(flash);
-      flash.dispose();
-    }, 150);
+    splashGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const splashMat = new THREE.PointsMaterial({ color: 0x050505, size: 0.2 }); // Black oil splash
+    const points = new THREE.Points(splashGeo, splashMat);
+    scene.add(points);
+    splashes.push({ points, vels, life: 1.0 });
   }
 
-  const clock = new THREE.Clock();
-
-  // Mouse interactivity
+  // Mouse interaction for slight parallax
   let mouseX = 0;
   let mouseY = 0;
   const windowHalfX = window.innerWidth / 2;
@@ -177,139 +203,100 @@ export function initThreeScene() {
     mouseY = (event.clientY - windowHalfY);
   });
 
-  // Core Animation Loop
+  const clock = new THREE.Clock();
+
   function animate() {
     requestAnimationFrame(animate);
     const delta = Math.min(clock.getDelta(), 0.1);
-    const time = Date.now();
+    
+    // Smooth Parallax
+    camera.position.x += (mouseX * 0.01 - camera.position.x) * 0.05;
+    camera.position.y += (15 + mouseY * 0.01 - camera.position.y) * 0.05;
+    camera.lookAt(0, 0, -5);
 
-    // Scene Parallax logic
-    scene.rotation.y += 0.05 * ((mouseX * 0.0005) - scene.rotation.y);
-    scene.rotation.x += 0.05 * ((mouseY * 0.0005) - scene.rotation.x);
+    // Droplet physics
+    for(let i=0; i<droplets.length; i++) {
+      const drop = droplets[i];
+      drop.velocity += 15 * delta; // Gravity
+      drop.mesh.position.y -= drop.velocity * delta;
+      
+      // Wobble stretch as it falls
+      drop.mesh.scale.y = 1 + (drop.velocity * 0.04);
+      drop.mesh.scale.x = 1 - (drop.velocity * 0.01);
+      drop.mesh.scale.z = 1 - (drop.velocity * 0.01);
 
-    // Update Droplets
-    droplets.forEach(droplet => {
-      droplet.mesh.position.add(droplet.velocity);
-      
-      // Wobbling effect to simulate liquid deformation relative to y-pos
-      const wobble = Math.sin(time * 0.005 + droplet.mesh.position.y) * 0.15;
-      droplet.mesh.scale.set(
-        droplet.baseScale * (1 + wobble),
-        droplet.baseScale * (1 - wobble),
-        droplet.baseScale * (1 + wobble)
-      );
-      
-      // Reset if it drops off the bottom
-      if (droplet.mesh.position.y < -20) {
-        droplet.mesh.position.y = 20 + Math.random() * 10;
-        droplet.mesh.position.x = (Math.random() - 0.5) * 40;
-        droplet.mesh.scale.setScalar(droplet.baseScale);
+      if (drop.mesh.position.y <= 0.1) {
+         // Splat!
+         createSplash(drop.mesh.position.clone());
+         spawnPacket(drop.traceData);
+         
+         // Reset droplet
+         const traceData = traces[Math.floor(Math.random() * traces.length)];
+         drop.mesh.position.set(traceData.start.x, 20 + Math.random() * 20, traceData.start.z);
+         drop.traceData = traceData;
+         drop.velocity = 0;
       }
-    });
-
-    // Update AI Nodes (Seeking behavior)
-    aiNodes.forEach(node => {
-      // Rotating the node for a technical feel
-      node.mesh.rotation.x += delta * 1.5;
-      node.mesh.rotation.y += delta * 1.5;
-      
-      let closestDist = Infinity;
-      let closestDroplet = null;
-
-      // Find the nearest oil droplet to track
-      droplets.forEach(droplet => {
-        const dist = node.mesh.position.distanceTo(droplet.mesh.position);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closestDroplet = droplet;
-        }
-      });
-
-      // Flocking / Seeking Logic
-      if (closestDroplet && closestDist < 12) {
-        // Accelerate towards the droplet
-        const dir = new THREE.Vector3().subVectors(closestDroplet.mesh.position, node.mesh.position).normalize();
-        node.velocity.lerp(dir.multiplyScalar(0.2), 0.05); // Smooth turning
-        
-        // Intensity of the AI node increases when it smells oil!
-        node.mesh.material.emissiveIntensity = 2.0;
-        node.mesh.scale.setScalar(1 + (12 - closestDist) * 0.05);
-      } else {
-        // Random wander if nothing is nearby
-        node.velocity.x += (Math.random() - 0.5) * 0.03;
-        node.velocity.y += (Math.random() - 0.5) * 0.03;
-        node.velocity.z += (Math.random() - 0.5) * 0.03;
-        
-        // Relax intensity and scale
-        node.mesh.material.emissiveIntensity = 1.0;
-        node.mesh.scale.lerp(new THREE.Vector3(1,1,1), 0.05);
-      }
-
-      // Limit Max Speed
-      node.velocity.clampLength(0, 0.15);
-      node.mesh.position.add(node.velocity);
-
-      // Bounce limits so nodes don't fly off forever
-      if (Math.abs(node.mesh.position.x) > 20) node.velocity.x *= -1;
-      if (node.mesh.position.y > 20 || node.mesh.position.y < -10) node.velocity.y *= -1;
-      if (Math.abs(node.mesh.position.z) > 15) node.velocity.z *= -1;
-
-      // Check Collision!
-      if (closestDroplet && closestDist < 0.6 + (closestDroplet.baseScale * 0.35)) {
-        // BAM! Collision
-        createExplosion(node.mesh.position.clone());
-        
-        // Reset Droplet high up
-        closestDroplet.mesh.position.y = 20 + Math.random() * 10;
-        closestDroplet.mesh.position.x = (Math.random() - 0.5) * 40;
-        
-        // Repel the AI node backward aggressively
-        node.velocity.multiplyScalar(-2);
-      }
-    });
-
-    // Update Explosions
-    for (let i = explosions.length - 1; i >= 0; i--) {
-      const exp = explosions[i];
-      exp.life -= delta * 1.2; // Fade rate
-      
-      if (exp.life <= 0) {
-        scene.remove(exp.points);
-        exp.points.geometry.dispose();
-        exp.points.material.dispose();
-        explosions.splice(i, 1);
-        continue;
-      }
-
-      const positions = exp.points.geometry.attributes.position.array;
-      for (let j = 0; j < exp.velocities.length; j++) {
-        // Move particle
-        positions[j*3]   += exp.velocities[j].x;
-        positions[j*3+1] += exp.velocities[j].y;
-        positions[j*3+2] += exp.velocities[j].z;
-        
-        // Apply gravity & drag to particles for realistic fireworks fall
-        exp.velocities[j].y -= 0.008; 
-        exp.velocities[j].multiplyScalar(0.96);
-      }
-      
-      exp.points.geometry.attributes.position.needsUpdate = true;
-      exp.points.material.opacity = exp.life;
-      
-      // Expand the points scale slightly over time
-      exp.scale += delta;
-      exp.points.scale.setScalar(exp.scale);
     }
 
-    // Gentle global scene rotation
-    scene.rotation.y += 0.0005;
+    // Packet Navigation
+    for(let i=packets.length-1; i>=0; i--) {
+       const p = packets[i];
+       if (p.currentWaypoint >= p.waypoints.length - 1) {
+          // Packet reached GPU!
+          gpuLight.intensity = Math.min(gpuLight.intensity + 1.0, 5.0); // Flare up the GPU
+          scene.remove(p.mesh);
+          packets.splice(i, 1);
+          continue;
+       }
+       
+       const wpStart = p.waypoints[p.currentWaypoint];
+       const wpEnd = p.waypoints[p.currentWaypoint + 1];
+       
+       p.progress += p.speed;
+       p.mesh.position.lerpVectors(wpStart, wpEnd, p.progress);
+       
+       if (p.progress >= 1) {
+          p.progress = 0;
+          p.currentWaypoint++;
+          p.mesh.position.copy(wpEnd);
+       }
+    }
+    
+    // GPU Light fade
+    if (gpuLight.intensity > 0) {
+       gpuLight.intensity -= delta * 1.5;
+    }
+
+    // Splashes physics
+    for(let i=splashes.length-1; i>=0; i--) {
+       const sp = splashes[i];
+       sp.life -= delta * 2;
+       if (sp.life <= 0) {
+          scene.remove(sp.points);
+          sp.points.geometry.dispose();
+          sp.points.material.dispose();
+          splashes.splice(i,1);
+          continue;
+       }
+       const pos = sp.points.geometry.attributes.position.array;
+       for(let j=0; j<sp.vels.length; j++) {
+          pos[j*3] += sp.vels[j].x;
+          pos[j*3+1] += sp.vels[j].y;
+          pos[j*3+2] += sp.vels[j].z;
+          sp.vels[j].y -= delta * 1.5; // Gravity
+       }
+       sp.points.geometry.attributes.position.needsUpdate = true;
+       // We fade points by scaling. Since size attenuation is on, we'll fake opacity using size if using simple mat.
+       // Actually size attenuation controls scale, opacity for PointsMaterial works fine if transparent.
+       sp.points.material.transparent = true;
+       sp.points.material.opacity = sp.life;
+    }
 
     renderer.render(scene, camera);
   }
 
   animate();
 
-  // Resize handler
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
