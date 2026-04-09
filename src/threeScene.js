@@ -1,198 +1,262 @@
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 export function initThreeScene() {
   const canvas = document.getElementById('three-canvas');
   if (!canvas) return;
 
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf1f3f5); // Soft white room background
-  scene.fog = new THREE.Fog(0xf1f3f5, 10, 60); // Fade into white
-
-  // Camera
-  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 150);
-  camera.position.set(0, 15, 25);
-  camera.lookAt(0, 0, -5);
-
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Video-game quality tone mapping for PBR realism
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xfdfdfd);
+  scene.fog = new THREE.Fog(0xfdfdfd, 20, 80);
+
+  // High-end Environment Map for Hyper-realistic Oil Reflections
+  const pmremGenerator = new THREE.PMREMGenerator(renderer);
+  pmremGenerator.compileEquirectangularShader();
+  scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+  // Camera setup
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
+  camera.position.set(0, 10, 35);
+  camera.lookAt(0, 5, -10);
+
   // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
-  
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  dirLight.position.set(20, 30, 10);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(15, 30, 20);
   dirLight.castShadow = true;
   dirLight.shadow.mapSize.width = 2048;
   dirLight.shadow.mapSize.height = 2048;
   dirLight.shadow.camera.near = 0.5;
   dirLight.shadow.camera.far = 100;
-  dirLight.shadow.camera.left = -30;
-  dirLight.shadow.camera.right = 30;
-  dirLight.shadow.camera.top = 30;
-  dirLight.shadow.camera.bottom = -30;
+  dirLight.shadow.camera.left = -40;
+  dirLight.shadow.camera.right = 40;
+  dirLight.shadow.camera.top = 40;
+  dirLight.shadow.camera.bottom = -40;
+  dirLight.shadow.bias = -0.0005;
   scene.add(dirLight);
 
-  // The Floor (Chip surface)
-  const floorGeo = new THREE.PlaneGeometry(100, 100);
+  // Massive GPU Core Background
+  const gpuGroup = new THREE.Group();
+  gpuGroup.position.set(0, -2, -25);
+  scene.add(gpuGroup);
+
+  const gpuMat = new THREE.MeshStandardMaterial({
+    color: 0x1a1c23,
+    metalness: 0.9,
+    roughness: 0.2,
+  });
+
+  // Main Core Base
+  const coreGeo = new THREE.BoxGeometry(80, 60, 10);
+  const coreMesh = new THREE.Mesh(coreGeo, gpuMat);
+  coreMesh.position.y = 30; // Towering into the background
+  coreMesh.receiveShadow = true;
+  coreMesh.castShadow = true;
+  gpuGroup.add(coreMesh);
+
+  // Advanced Heat Fins on GPU
+  const finGeo = new THREE.BoxGeometry(75, 50, 1.5);
+  const finMat = new THREE.MeshStandardMaterial({ color: 0x0f0f0f, metalness: 1.0, roughness: 0.3 });
+  for (let z = 0; z < 6; z += 1.5) {
+      if (z === 0) continue;
+      const fin = new THREE.Mesh(finGeo, finMat);
+      fin.position.set(0, 30, 5 + z);
+      fin.receiveShadow = true;
+      fin.castShadow = true;
+      gpuGroup.add(fin);
+  }
+
+  // Glowing GPU seams (Emissive Lines)
+  const seamGeo = new THREE.PlaneGeometry(76, 1.5);
+  const seamMat = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      emissive: 0xff0800,
+      emissiveIntensity: 0.0, // defaults to off
+  });
+  
+  const seams = [];
+  for (let y = 10; y < 50; y += 8) {
+      const seam = new THREE.Mesh(seamGeo, seamMat.clone());
+      seam.position.set(0, y, 10.1);
+      gpuGroup.add(seam);
+      seams.push(seam);
+  }
+
+  // Center GPU Flash
+  const coreLight = new THREE.PointLight(0xff1100, 0, 70);
+  coreLight.position.set(0, 5, 12);
+  gpuGroup.add(coreLight);
+
+  // Clean White Floor
+  const floorGeo = new THREE.PlaneGeometry(200, 200);
   const floorMat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    roughness: 0.15,
-    metalness: 0.05
+    color: 0xe8ecef, // Slightly cool white
+    metalness: 0.3,  // Metallic reflection
+    roughness: 0.15, // Smooth but not a mirror
   });
   const floor = new THREE.Mesh(floorGeo, floorMat);
   floor.rotation.x = -Math.PI / 2;
   floor.receiveShadow = true;
   scene.add(floor);
 
-  // The GPU Processor
-  const gpuGroup = new THREE.Group();
-  gpuGroup.position.set(0, 0.8, -12);
-  scene.add(gpuGroup);
-
-  const gpuGeo = new THREE.BoxGeometry(6, 1.6, 6);
-  const gpuMat = new THREE.MeshStandardMaterial({
-    color: 0x222222,
-    metalness: 0.9,
-    roughness: 0.1,
+  // Circuit Ends and physical floor traces
+  const traces = [];
+  const padGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.1, 32);
+  const padMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      metalness: 0.9,
+      roughness: 0.1,
   });
-  const gpu = new THREE.Mesh(gpuGeo, gpuMat);
-  gpu.castShadow = true;
-  gpu.receiveShadow = true;
-  gpuGroup.add(gpu);
 
-  // GPU Light emission
-  const gpuLight = new THREE.PointLight(0xb91c1c, 0, 30);
-  gpuLight.position.set(0, 2, 0);
-  gpuGroup.add(gpuLight);
+  const traceMaterial = new THREE.MeshStandardMaterial({
+      color: 0xd0d5db,
+      metalness: 1.0,
+      roughness: 0.2
+  });
 
-  // Add some aesthetic fins to GPU
-  const finMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 1 });
-  for (let i=-2; i<=2; i+=0.5) {
-     const fin = new THREE.Mesh(new THREE.BoxGeometry(5.8, 2, 0.2), finMat);
-     fin.position.set(0, 0, i);
-     fin.castShadow = true;
-     gpuGroup.add(fin);
-  }
-
-  // Circuit Traces
-  const traces = []; 
-  // Arrays to hold the routing logic
-  for (let i = 0; i < 25; i++) {
-    // Random input spots scattered around the floor
-    const startPt = new THREE.Vector3(
-      (Math.random() - 0.5) * 50,
-      0.01,
-      (Math.random() - 0.5) * 30 + 5
-    );
-
-    // Filter points too close to GPU to avoid clipping
-    if (startPt.distanceTo(gpuGroup.position) < 8) continue;
+  for (let i = 0; i < 24; i++) {
+    const startX = (Math.random() - 0.5) * 60;
+    const startZ = Math.random() * 35; // Spread out toward camera
+    
+    // The "Circuit End" target pad
+    const pad = new THREE.Mesh(padGeo, padMat);
+    pad.position.set(startX, 0.05, startZ);
+    pad.receiveShadow = true;
+    scene.add(pad);
 
     const points = [];
-    points.push(startPt);
+    points.push(new THREE.Vector3(startX, 0.05, startZ));
     
-    // Orthogonal routing for circuit board look
-    const turn1 = new THREE.Vector3(startPt.x, 0.01, gpuGroup.position.z + (Math.random()-0.5)*2);
-    points.push(turn1);
+    // 90-degree orthogonal paths for realistic circuit visual
+    const zTurn = -5 + (Math.random() - 0.5) * 15; 
+    points.push(new THREE.Vector3(startX, 0.05, zTurn));
     
-    const turn2 = new THREE.Vector3(gpuGroup.position.x + (Math.random()-0.5)*4, 0.01, turn1.z);
-    points.push(turn2);
+    const targetX = startX * 0.15; // funnels into the massive base
+    points.push(new THREE.Vector3(targetX, 0.05, zTurn));
 
-    const endPt = new THREE.Vector3(turn2.x, 0.01, gpuGroup.position.z);
-    points.push(endPt);
-
-    const traceGeo = new THREE.BufferGeometry().setFromPoints(points);
-    const traceMat = new THREE.LineBasicMaterial({ color: 0xcccccc, linewidth: 2 });
-    const traceLine = new THREE.Line(traceGeo, traceMat);
-    scene.add(traceLine);
+    const endZ = -20; // Goes all the way into the massive GPU board
+    points.push(new THREE.Vector3(targetX, 0.05, endZ));
     
+    // Render actual deep trace lines built into the floor
+    for(let j=0; j<points.length-1; j++) {
+        const p1 = points[j];
+        const p2 = points[j+1];
+        const dist = p1.distanceTo(p2);
+        if (dist === 0) continue;
+        
+        const boxGeo = new THREE.BoxGeometry(0.4, 0.06, dist);
+        const box = new THREE.Mesh(boxGeo, traceMaterial);
+        
+        box.position.copy(p1).lerp(p2, 0.5);
+        box.lookAt(p2);
+        box.receiveShadow = true;
+        scene.add(box);
+    }
+
     traces.push({
-      start: startPt,
-      waypoints: [startPt, turn1, turn2, endPt]
+      start: new THREE.Vector3(startX, 0.1, startZ),
+      waypoints: points
     });
   }
 
-  // Droplets
+  // Hyper-realistic Oil Droplets
   const droplets = [];
-  const dropletGeo = new THREE.SphereGeometry(0.3, 32, 32);
-  // Dripping black oil
-  const dropletMat = new THREE.MeshPhysicalMaterial({
-    color: 0x050505,
-    metalness: 1.0,
-    roughness: 0.1,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.1
+  const dropletGeo = new THREE.SphereGeometry(0.4, 64, 64);
+  const oilMat = new THREE.MeshPhysicalMaterial({
+    color: 0x010101,     // Pitch black base
+    metalness: 1.0,      // Max metalness for strong liquid reflections
+    roughness: 0.0,      // Pristine smooth surface
+    clearcoat: 1.0,      // High gloss layer
+    clearcoatRoughness: 0.0,
+    ior: 1.5             // Realistic fluid index of refraction
   });
 
   function spawnDroplet() {
-    const mesh = new THREE.Mesh(dropletGeo, dropletMat);
+    const mesh = new THREE.Mesh(dropletGeo, oilMat);
     const traceData = traces[Math.floor(Math.random() * traces.length)];
     
-    mesh.position.set(traceData.start.x, 20 + Math.random() * 15, traceData.start.z);
+    // Start high up to drop beautifully
+    mesh.position.set(traceData.start.x, 25 + Math.random() * 20, traceData.start.z);
     mesh.castShadow = true;
     scene.add(mesh);
     
     droplets.push({
       mesh,
       traceData,
-      velocity: 0
+      velocity: 0,
     });
   }
 
-  // Initialize droplets
-  for (let i=0; i<8; i++) spawnDroplet();
-
-  // AI Data Packets shooting down traces
-  const packets = [];
-  function spawnPacket(traceData) {
-    const packetGeo = new THREE.SphereGeometry(0.15, 16, 16);
-    const packetMat = new THREE.MeshBasicMaterial({ color: 0xe11d48 });
-    const mesh = new THREE.Mesh(packetGeo, packetMat);
-    
-    mesh.position.copy(traceData.start);
-    scene.add(mesh);
-    
-    const light = new THREE.PointLight(0xe11d48, 2, 5);
-    mesh.add(light);
-    
-    packets.push({
-      mesh,
-      waypoints: traceData.waypoints,
-      currentWaypoint: 0,
-      progress: 0,
-      speed: 0.04 + Math.random() * 0.03
-    });
-  }
-
-  // Splash Effect
+  // Init Droplets
+  for (let i=0; i<10; i++) spawnDroplet();
+  
+  // Real Physics Splash Arrays
   const splashes = [];
+  const splashGeo = new THREE.SphereGeometry(0.12, 16, 16);
+
   function createSplash(position) {
-    const splashGeo = new THREE.BufferGeometry();
-    const count = 15;
-    const posArray = new Float32Array(count * 3);
-    const vels = [];
-    for(let i=0; i<count; i++) {
-        posArray[i*3] = position.x;
-        posArray[i*3+1] = position.y;
-        posArray[i*3+2] = position.z;
-        vels.push(new THREE.Vector3(
-           (Math.random()-0.5)*0.3,
-           0.1 + Math.random()*0.3,
-           (Math.random()-0.5)*0.3
-        ));
-    }
-    splashGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const splashMat = new THREE.PointsMaterial({ color: 0x050505, size: 0.2 }); // Black oil splash
-    const points = new THREE.Points(splashGeo, splashMat);
-    scene.add(points);
-    splashes.push({ points, vels, life: 1.0 });
+     const count = 12 + Math.floor(Math.random() * 6);
+     for(let i=0; i<count; i++) {
+        const mesh = new THREE.Mesh(splashGeo, oilMat);
+        mesh.position.copy(position);
+        mesh.position.y += 0.2;
+        mesh.castShadow = true;
+        scene.add(mesh);
+        
+        const vel = new THREE.Vector3(
+           (Math.random() - 0.5) * 8, // Burst outwards
+           Math.random() * 10 + 4,    // Arc upwards
+           (Math.random() - 0.5) * 8
+        );
+        splashes.push({ mesh, vel, life: 1.0 });
+     }
   }
 
-  // Mouse interaction for slight parallax
+  // Glowing "Reddish Runs" that traverse the traces
+  const runs = [];
+  const runGeo = new THREE.CapsuleGeometry(0.25, 2.0, 16, 16);
+  runGeo.rotateX(Math.PI/2); // Align capsule natively along the Z axis
+
+  const runMat = new THREE.MeshStandardMaterial({
+      color: 0xff0000,
+      emissive: 0xff0a00,
+      emissiveIntensity: 6.0
+  });
+
+  function spawnRun(traceData) {
+     const mesh = new THREE.Mesh(runGeo, runMat);
+     mesh.position.copy(traceData.waypoints[0]);
+     scene.add(mesh);
+
+     // Emit light natively across the white floor as it travels
+     const light = new THREE.PointLight(0xff0800, 2.5, 7);
+     mesh.add(light);
+     
+     // Point correctly exactly at birth
+     if (traceData.waypoints.length > 1) {
+         mesh.lookAt(traceData.waypoints[1]);
+     }
+
+     runs.push({
+        mesh,
+        waypoints: traceData.waypoints,
+        currentWp: 0,
+        progress: 0,
+        speed: 0.015 + Math.random() * 0.005 // Moving SLOWLY as requested
+     });
+  }
+
   let mouseX = 0;
   let mouseY = 0;
   const windowHalfX = window.innerWidth / 2;
@@ -204,92 +268,114 @@ export function initThreeScene() {
   });
 
   const clock = new THREE.Clock();
+  let gpuFlashTimer = 0;
 
   function animate() {
     requestAnimationFrame(animate);
     const delta = Math.min(clock.getDelta(), 0.1);
-    
-    // Smooth Parallax
-    camera.position.x += (mouseX * 0.01 - camera.position.x) * 0.05;
-    camera.position.y += (15 + mouseY * 0.01 - camera.position.y) * 0.05;
-    camera.lookAt(0, 0, -5);
 
-    // Droplet physics
-    for(let i=0; i<droplets.length; i++) {
-      const drop = droplets[i];
-      drop.velocity += 15 * delta; // Gravity
-      drop.mesh.position.y -= drop.velocity * delta;
-      
-      // Wobble stretch as it falls
-      drop.mesh.scale.y = 1 + (drop.velocity * 0.04);
-      drop.mesh.scale.x = 1 - (drop.velocity * 0.01);
-      drop.mesh.scale.z = 1 - (drop.velocity * 0.01);
+    // Smooth Mouse Parallax
+    camera.position.x += (mouseX * 0.012 - camera.position.x) * 0.05;
+    camera.position.y += (10 + mouseY * 0.012 - camera.position.y) * 0.05;
+    camera.lookAt(0, 6, -10);
 
-      if (drop.mesh.position.y <= 0.1) {
-         // Splat!
-         createSplash(drop.mesh.position.clone());
-         spawnPacket(drop.traceData);
-         
-         // Reset droplet
-         const traceData = traces[Math.floor(Math.random() * traces.length)];
-         drop.mesh.position.set(traceData.start.x, 20 + Math.random() * 20, traceData.start.z);
-         drop.traceData = traceData;
-         drop.velocity = 0;
-      }
-    }
+    // Droplet physics & rendering
+    for (let i=0; i<droplets.length; i++) {
+        const drop = droplets[i];
+        drop.velocity += 18 * delta; // Native gravity accel
+        drop.mesh.position.y -= drop.velocity * delta;
+        
+        // Stretch droplet dynamically based on fall velocity to look perfectly liquid
+        const stretch = Math.min(1 + drop.velocity * 0.03, 3.0);
+        const squish = 1 / Math.sqrt(stretch);
+        drop.mesh.scale.set(squish, stretch, squish);
 
-    // Packet Navigation
-    for(let i=packets.length-1; i>=0; i--) {
-       const p = packets[i];
-       if (p.currentWaypoint >= p.waypoints.length - 1) {
-          // Packet reached GPU!
-          gpuLight.intensity = Math.min(gpuLight.intensity + 1.0, 5.0); // Flare up the GPU
-          scene.remove(p.mesh);
-          packets.splice(i, 1);
-          continue;
-       }
-       
-       const wpStart = p.waypoints[p.currentWaypoint];
-       const wpEnd = p.waypoints[p.currentWaypoint + 1];
-       
-       p.progress += p.speed;
-       p.mesh.position.lerpVectors(wpStart, wpEnd, p.progress);
-       
-       if (p.progress >= 1) {
-          p.progress = 0;
-          p.currentWaypoint++;
-          p.mesh.position.copy(wpEnd);
-       }
+        if (drop.mesh.position.y <= drop.traceData.start.y + 0.2) {
+           createSplash(drop.traceData.start);
+           spawnRun(drop.traceData);
+           
+           // Immediate reset out of view
+           const newTrace = traces[Math.floor(Math.random() * traces.length)];
+           drop.mesh.position.set(newTrace.start.x, 30 + Math.random() * 50, newTrace.start.z);
+           drop.traceData = newTrace;
+           drop.velocity = 0;
+           drop.mesh.scale.setScalar(1);
+        }
     }
     
-    // GPU Light fade
-    if (gpuLight.intensity > 0) {
-       gpuLight.intensity -= delta * 1.5;
-    }
-
-    // Splashes physics
+    // Splashes physics execution
     for(let i=splashes.length-1; i>=0; i--) {
        const sp = splashes[i];
-       sp.life -= delta * 2;
-       if (sp.life <= 0) {
-          scene.remove(sp.points);
-          sp.points.geometry.dispose();
-          sp.points.material.dispose();
+       sp.vel.y -= 25 * delta; // Splash arching gravity
+       sp.mesh.position.addScaledVector(sp.vel, delta);
+       sp.life -= delta * 1.5;
+       
+       sp.mesh.scale.setScalar(sp.life); // Fade out size organically
+
+       // Destroy if floor is hit or dead
+       if(sp.life <= 0 || sp.mesh.position.y <= 0.05) {
+          scene.remove(sp.mesh);
           splashes.splice(i,1);
-          continue;
        }
-       const pos = sp.points.geometry.attributes.position.array;
-       for(let j=0; j<sp.vels.length; j++) {
-          pos[j*3] += sp.vels[j].x;
-          pos[j*3+1] += sp.vels[j].y;
-          pos[j*3+2] += sp.vels[j].z;
-          sp.vels[j].y -= delta * 1.5; // Gravity
+    }
+
+    // Circuit Runs traversal
+    for(let i=runs.length-1; i>=0; i--) {
+        const run = runs[i];
+        if (run.currentWp >= run.waypoints.length - 1) {
+           // Impacted GPU!
+           gpuFlashTimer = 1.0;
+           scene.remove(run.mesh);
+           run.mesh.geometry.dispose();
+           runs.splice(i,1);
+           continue;
+        }
+
+        const p1 = run.waypoints[run.currentWp];
+        const p2 = run.waypoints[run.currentWp + 1];
+        
+        const dist = p1.distanceTo(p2);
+        
+        // Normalize speed to distance so it crawls slowly and evenly
+        if (dist > 0) {
+            const progressIncrement = (run.speed * 20 * delta) / dist;
+            run.progress += progressIncrement;
+        } else {
+            run.progress = 1;
+        }
+        
+        if (run.progress >= 1) {
+           run.mesh.position.copy(p2);
+           run.currentWp++;
+           run.progress = 0;
+           
+           // Turn exactly 90 deg directly towards next waypoint
+           if (run.currentWp < run.waypoints.length - 1) {
+              const nextP2 = run.waypoints[run.currentWp + 1];
+              run.mesh.lookAt(nextP2);
+           }
+        } else {
+           run.mesh.position.copy(p1).lerp(p2, run.progress);
+        }
+    }
+    
+    // Smooth GPU Core Lighting
+    if (gpuFlashTimer > 0) {
+       gpuFlashTimer -= delta * 1.2;
+       coreLight.intensity = Math.min(18, coreLight.intensity + delta * 80);
+       seams.forEach(seam => {
+          seam.material.emissiveIntensity = 8.0 * Math.max(0, gpuFlashTimer);
+       });
+    } else {
+       if (coreLight.intensity > 0) {
+          // Fade down naturally
+          coreLight.intensity = Math.max(0, coreLight.intensity - delta * 15);
        }
-       sp.points.geometry.attributes.position.needsUpdate = true;
-       // We fade points by scaling. Since size attenuation is on, we'll fake opacity using size if using simple mat.
-       // Actually size attenuation controls scale, opacity for PointsMaterial works fine if transparent.
-       sp.points.material.transparent = true;
-       sp.points.material.opacity = sp.life;
+       seams.forEach(seam => {
+          if (seam.material.emissiveIntensity > 0) {
+              seam.material.emissiveIntensity = Math.max(0, seam.material.emissiveIntensity - delta * 5);
+          }
+       });
     }
 
     renderer.render(scene, camera);
