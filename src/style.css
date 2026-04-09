@@ -183,6 +183,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
+  opacity: 0.15;
 }
 
 .slide-bg-video {
@@ -192,6 +193,7 @@ body {
   height: 100vh;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.2;
 }
 
 .fallback-bg {
@@ -201,17 +203,17 @@ body {
 .slide-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 10, 10, 0.75);
+  background: rgba(10, 10, 10, 0.3);
   z-index: 1;
 }
 
 .overlay-gradient-left {
   background: linear-gradient(
     to right,
-    rgba(10, 10, 10, 0.92) 0%,
-    rgba(10, 10, 10, 0.85) 40%,
-    rgba(10, 10, 10, 0.5) 70%,
-    rgba(10, 10, 10, 0.3) 100%
+    rgba(10, 10, 10, 0.7) 0%,
+    rgba(10, 10, 10, 0.5) 40%,
+    rgba(10, 10, 10, 0.2) 70%,
+    rgba(10, 10, 10, 0.1) 100%
   );
 }
 

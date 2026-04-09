@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
+  <!-- Global 3D Cinematic Background -->
+  <canvas id="three-canvas" style="position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:-10; pointer-events: none;"></canvas>
+
   <!-- Navigation -->
   <nav id="nav" class="nav">
     <div class="nav-logo">
@@ -27,8 +30,7 @@
   <div class="progress-bar" id="progressBar"></div>
 
   <!-- Slide 1: Title -->
-  <section class="slide slide-1" id="slide-1" data-slide="0">
-    <canvas id="three-canvas" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events: none; opacity: 1.0;"></canvas>
+  <section class="slide slide-1 light-theme" id="slide-1" data-slide="0">
     <div class="slide-overlay" style="background: rgba(255, 255, 255, 0.4);"></div>
     <div class="slide-content slide-1-content">
       <div class="logo-badge animate-in">

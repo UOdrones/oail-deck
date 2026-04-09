@@ -58,12 +58,20 @@ const slideObserver = new IntersectionObserver((entries) => {
 
 slides.forEach((slide) => slideObserver.observe(slide));
 
-// Progress bar
+// Progress bar and 3D Camera Sync
+import { updateCameraScroll } from './threeScene.js';
+
 function updateProgress() {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  progressBar.style.width = `${progress}%`;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) : 0;
+  
+  progressBar.style.width = `${progress * 100}%`;
+  
+  // Sync 3D Camera Flythrough
+  if (typeof updateCameraScroll === 'function') {
+    updateCameraScroll(progress);
+  }
 }
 
 window.addEventListener('scroll', updateProgress, { passive: true });
