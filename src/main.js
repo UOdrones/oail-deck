@@ -4,6 +4,10 @@
 // ============================================
 
 import './style.css';
+import { initThreeScene } from './threeScene.js';
+
+// Init background 3D Scene
+initThreeScene();
 
 // Create nav dots
 const slides = document.querySelectorAll('.slide');
