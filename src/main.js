@@ -4,10 +4,6 @@
 // ============================================
 
 import './style.css';
-import { initThreeScene } from './threeScene.js';
-
-// Init background 3D Scene
-initThreeScene();
 
 // Create nav dots
 const slides = document.querySelectorAll('.slide');
@@ -58,20 +54,12 @@ const slideObserver = new IntersectionObserver((entries) => {
 
 slides.forEach((slide) => slideObserver.observe(slide));
 
-// Progress bar and 3D Camera Sync
-import { updateCameraScroll } from './threeScene.js';
-
 function updateProgress() {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = docHeight > 0 ? (scrollTop / docHeight) : 0;
   
   progressBar.style.width = `${progress * 100}%`;
-  
-  // Sync 3D Camera Flythrough
-  if (typeof updateCameraScroll === 'function') {
-    updateCameraScroll(progress);
-  }
 }
 
 window.addEventListener('scroll', updateProgress, { passive: true });
